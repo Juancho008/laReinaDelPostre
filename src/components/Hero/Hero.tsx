@@ -3,6 +3,7 @@ const HERO_IMAGE = '/hero.webp'
 export function Hero() {
   return (
     <section className="hero" aria-labelledby="hero-title">
+      <div className="scallop scallop--hero-top" aria-hidden />
       <img
         className="hero__cover"
         src={HERO_IMAGE}

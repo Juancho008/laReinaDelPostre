@@ -16,6 +16,8 @@
   --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.06);
   --radius-card: 14px;
   --max-width: 1180px;
+  --nav-row-height: clamp(3rem, 2.5rem + 1vw, 3.5rem);
+  --nav-icon-size: clamp(1.55rem, 1.35rem + 0.4vw, 1.75rem);
 }
 
 *,
@@ -66,6 +68,11 @@ a {
   mask-size: 28px 28px;
   mask-repeat: repeat-x;
   mask-position: center bottom;
+}
+
+.scallop--header {
+  position: relative;
+  z-index: 4;
   transform: translateY(1px);
 }
 
@@ -73,46 +80,64 @@ a {
   background: var(--color-white);
   position: relative;
   z-index: 5;
-  padding-bottom: 0.35rem;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
 }
 
 .site-header__inner {
   width: min(100%, var(--max-width));
   margin: 0 auto;
-  padding: 1.35rem clamp(1.25rem, 4vw, 2.75rem) 2.75rem;
+  padding: 1.25rem clamp(1rem, 4vw, 2.75rem) 0.5rem;
+}
+
+.site-header__row {
   display: grid;
-  grid-template-columns: 1fr minmax(200px, 240px) 1fr;
+  grid-template-columns: 1fr minmax(0, auto) 1fr;
   align-items: center;
-  column-gap: 1rem;
-  min-height: 3.75rem;
+  width: 100%;
+  min-height: var(--nav-row-height);
 }
 
-.brand-slot {
+.site-header__nav-bundle {
   grid-column: 2;
-  min-height: 1px;
-}
-
-.nav--left {
-  grid-column: 1;
-  justify-self: start;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.65rem, 2vw, 1.5rem);
   position: relative;
   z-index: 10;
+  max-width: 100%;
 }
 
-.site-header__cluster--right {
+.site-header__utilities {
   grid-column: 3;
   justify-self: end;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: clamp(1.5rem, 3vw, 2.75rem);
-  position: relative;
   z-index: 10;
 }
 
+.header-actions {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.1rem, 0.5vw, 0.25rem);
+  min-height: var(--nav-row-height);
+  padding-left: clamp(0.75rem, 2vw, 1.5rem);
+  border-left: 1px solid #e8e0e5;
+}
+
+.brand-slot {
+  flex: 0 0 clamp(140px, 14vw, 194px);
+  min-height: 1px;
+}
+
+.nav--left,
 .nav--right {
   flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  min-height: var(--nav-row-height);
 }
 
 .nav-links {
@@ -121,33 +146,24 @@ a {
   padding: 0;
   display: flex;
   align-items: center;
-  gap: clamp(1.5rem, 3vw, 2.75rem);
+  min-height: var(--nav-row-height);
+  gap: clamp(0.85rem, 2vw, 1.75rem);
   flex-wrap: nowrap;
 }
 
-.header-actions {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  gap: 0.35rem;
-  margin-left: 0;
-  padding-left: clamp(1rem, 2vw, 1.5rem);
-  border-left: 1px solid #e8e0e5;
-}
-
 .nav-link {
-  font-size: clamp(1rem, 0.9rem + 0.35vw, 1.125rem);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--nav-row-height);
+  font-size: clamp(0.95rem, 0.85rem + 0.35vw, 1.125rem);
   font-weight: 600;
   letter-spacing: 0.02em;
   color: #5c5c64;
   transition: color 0.2s ease;
   white-space: nowrap;
-  padding: 0.35rem 0.15rem 0.55rem;
+  padding: 0 0.15rem;
   position: relative;
-}
-
-.nav-link:hover {
-  color: var(--color-pink-deep);
 }
 
 .nav-link--active {
@@ -158,7 +174,7 @@ a {
   content: '';
   position: absolute;
   left: 50%;
-  bottom: 0;
+  bottom: 0.2rem;
   transform: translateX(-50%);
   width: 6px;
   height: 6px;
@@ -167,11 +183,15 @@ a {
   opacity: 0.85;
 }
 
+.nav-link:hover {
+  color: var(--color-pink-deep);
+}
+
 .brand {
   position: absolute;
   left: 50%;
   bottom: 0;
-  transform: translate(-50%, 58%);
+  transform: translate(-50%, 62%);
   z-index: 8;
   text-align: center;
 }
@@ -219,18 +239,27 @@ a {
   border: none;
   background: transparent;
   cursor: pointer;
-  font-size: 1.28rem;
-  color: #5c5c64;
-  width: 2.85rem;
-  height: 2.85rem;
+  color: #4a4a52;
   border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
   padding: 0;
+  line-height: 0;
   transition:
     background 0.2s ease,
     color 0.2s ease;
+}
+
+.icon-btn--utility {
+  width: var(--nav-row-height);
+  height: var(--nav-row-height);
+}
+
+.icon-btn__svg {
+  width: var(--nav-icon-size);
+  height: var(--nav-icon-size);
+  display: block;
+  flex-shrink: 0;
 }
 
 .icon-btn:hover {
@@ -243,11 +272,6 @@ a {
   display: none;
 }
 
-.scallop--header {
-  position: relative;
-  z-index: 4;
-}
-
 .site-header__toolbar {
   display: none;
 }
@@ -258,6 +282,26 @@ a {
   margin-top: -0.5rem;
   padding-top: 5.5rem;
   min-height: clamp(520px, 62vh, 680px);
+}
+
+.scallop--hero-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  transform: rotate(180deg);
+  pointer-events: none;
+}
+
+.scallop--hero {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  transform: translateY(1px);
+  pointer-events: none;
 }
 
 .hero__cover {
@@ -346,14 +390,6 @@ a {
 .hero__cta:hover {
   background: var(--color-white);
   color: #555;
-}
-
-.scallop--hero {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 3;
 }
 
 .shop-main {
@@ -581,9 +617,22 @@ a {
 }
 
 @media (min-width: 961px) and (max-width: 1140px) {
+  .brand-slot {
+    flex-basis: 132px;
+  }
+
+  .site-header__nav-bundle {
+    gap: 0.55rem;
+  }
+
+  .nav-links {
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 520px) {
   .site-header__inner {
-    grid-template-columns: 1fr minmax(180px, 200px) 1fr;
-    padding-bottom: 2.5rem;
+    padding-top: 2.5rem;
   }
 }
 
@@ -593,29 +642,24 @@ a {
   }
 
   .site-header__inner {
-    display: flex;
-    justify-content: flex-end;
-    min-height: 3.25rem;
-    padding: 3.25rem clamp(1rem, 4vw, 1.5rem) 0.35rem;
-    column-gap: 0;
-  }
-
-  .brand-slot {
-    display: none;
+    padding: 2.75rem clamp(0.85rem, 4vw, 1.5rem) 0.5rem;
+    width: 100%;
   }
 
   .site-header__toolbar {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 0.15rem;
+    gap: clamp(0.1rem, 1vw, 0.25rem);
     width: 100%;
+    min-height: var(--nav-row-height);
+    grid-template-columns: 1fr;
     z-index: 2;
   }
 
   .site-header__toolbar .header-actions {
-    margin-left: 0;
-    padding-left: 0.75rem;
+    min-height: var(--nav-row-height);
+    padding-left: clamp(0.65rem, 2vw, 0.85rem);
     border-left: 1px solid #e8e0e5;
   }
 

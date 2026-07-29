@@ -1,5 +1,6 @@
 import type { NavItem } from '../../types'
 import { useNavMenu } from '../../hooks'
+import { CartIcon, MenuIcon, SearchIcon } from './NavIcons'
 
 interface NavbarProps {
   leftItems: NavItem[]
@@ -24,6 +25,19 @@ function NavLinks({ items, onNavigate }: { items: NavItem[]; onNavigate?: () => 
   )
 }
 
+function HeaderActions() {
+  return (
+    <>
+      <button type="button" className="icon-btn icon-btn--utility" aria-label="Buscar">
+        <SearchIcon />
+      </button>
+      <button type="button" className="icon-btn icon-btn--utility" aria-label="Carrito">
+        <CartIcon />
+      </button>
+    </>
+  )
+}
+
 export function Navbar({ leftItems, rightItems }: NavbarProps) {
   const { isOpen, toggleMenu, closeMenu } = useNavMenu()
   const mobileItems = [...leftItems, ...rightItems]
@@ -31,44 +45,37 @@ export function Navbar({ leftItems, rightItems }: NavbarProps) {
   return (
     <header className="site-header" id="home">
       <div className="site-header__inner">
-        <nav className="nav nav--left nav--desktop" aria-label="Principal izquierda">
-          <NavLinks items={leftItems} />
-        </nav>
+        <div className="site-header__row nav--desktop">
+          <div className="site-header__nav-bundle">
+            <nav className="nav nav--left" aria-label="Principal izquierda">
+              <NavLinks items={leftItems} />
+            </nav>
 
-        <div className="brand-slot" aria-hidden />
+            <div className="brand-slot" aria-hidden />
 
-        <div className="site-header__cluster site-header__cluster--right nav--desktop">
-          <nav className="nav nav--right" aria-label="Principal derecha">
-            <NavLinks items={rightItems} />
-          </nav>
-          <div className="header-actions">
-            <button type="button" className="icon-btn" aria-label="Buscar">
-              <span aria-hidden>⌕</span>
-            </button>
-            <button type="button" className="icon-btn" aria-label="Carrito">
-              <span aria-hidden>🛍</span>
-            </button>
+            <nav className="nav nav--right" aria-label="Principal derecha">
+              <NavLinks items={rightItems} />
+            </nav>
+          </div>
+
+          <div className="header-actions site-header__utilities">
+            <HeaderActions />
           </div>
         </div>
 
-        <div className="site-header__toolbar nav--mobile">
+        <div className="site-header__row site-header__toolbar nav--mobile">
           <button
             type="button"
-            className="icon-btn icon-btn--menu"
+            className="icon-btn icon-btn--utility icon-btn--menu"
             aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={isOpen}
             aria-controls="site-mobile-nav"
             onClick={toggleMenu}
           >
-            <span aria-hidden>{isOpen ? '✕' : '☰'}</span>
+            <MenuIcon open={isOpen} />
           </button>
           <div className="header-actions">
-            <button type="button" className="icon-btn" aria-label="Buscar">
-              <span aria-hidden>⌕</span>
-            </button>
-            <button type="button" className="icon-btn" aria-label="Carrito">
-              <span aria-hidden>🛍</span>
-            </button>
+            <HeaderActions />
           </div>
         </div>
       </div>
