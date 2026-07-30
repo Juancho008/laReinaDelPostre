@@ -1,17 +1,37 @@
 import { Hero } from '../components/Hero'
 import { Navbar } from '../components/Navbar'
 import { ProductGrid } from '../components/ProductGrid'
-import { ScrollToTop } from '../components/ScrollToTop'
+import { Footer } from '../components/Footer'
 import { Sidebar } from '../components/Sidebar'
 import { MOCK_NAV_LEFT, MOCK_NAV_RIGHT } from '../Mock'
 import { useCart, useProductFilters, useProducts, useScrollToTop } from '../hooks'
 
 export function ShopPage() {
   const { products, tags, loading, error } = useProducts()
-  const { cartProducts, isEmpty, addItem } = useCart()
-  const { searchQuery, selectedTagId, filteredProducts, setSearch, toggleTag } =
-    useProductFilters(products)
-  const { visible, scrollToTop } = useScrollToTop()
+  const {
+    cartProducts,
+    isEmpty,
+    subtotalPrice,
+    shippingCost,
+    totalPrice,
+    addItem,
+    decrementItem,
+    removeItem,
+    clearCart,
+  } = useCart()
+  const {
+    searchQuery,
+    selectedTagId,
+    priceMin,
+    priceMax,
+    priceCeiling,
+    filteredProducts,
+    setSearch,
+    toggleTag,
+    setPriceMax,
+    applyPriceFilter,
+  } = useProductFilters(products)
+  const { scrollToTop } = useScrollToTop()
 
   return (
     <div className="shop-page">
@@ -34,10 +54,22 @@ export function ShopPage() {
             onToggleTag={toggleTag}
             cartItems={cartProducts}
             cartEmpty={isEmpty}
+            cartSubtotalPrice={subtotalPrice}
+            cartShippingCost={shippingCost}
+            cartTotalPrice={totalPrice}
+            onCartIncrement={addItem}
+            onCartDecrement={decrementItem}
+            onCartRemove={removeItem}
+            onCartClear={clearCart}
+            priceMin={priceMin}
+            priceMax={priceMax}
+            priceCeiling={priceCeiling}
+            onPriceMaxChange={setPriceMax}
+            onPriceFilterApply={applyPriceFilter}
           />
         </div>
       </main>
-      <ScrollToTop visible={visible} onClick={scrollToTop} />
+      <Footer onScrollTop={scrollToTop} />
     </div>
   )
 }

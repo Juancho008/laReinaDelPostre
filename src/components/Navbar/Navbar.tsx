@@ -1,5 +1,7 @@
 import type { NavItem } from '../../types'
-import { useNavMenu } from '../../hooks'
+import { SITE_BRAND_NAME } from '../../Mock/data/brand'
+import { useCart, useNavMenu, useWhatsAppCheckout } from '../../hooks'
+import { SiteLogo } from '../SiteLogo'
 import { CartIcon, MenuIcon, SearchIcon } from './NavIcons'
 
 interface NavbarProps {
@@ -25,14 +27,34 @@ function NavLinks({ items, onNavigate }: { items: NavItem[]; onNavigate?: () => 
   )
 }
 
-function HeaderActions() {
+function HeaderActions({
+  cartCount,
+  onCartClick,
+}: {
+  cartCount: number
+  onCartClick: () => void
+}) {
   return (
     <>
       <button type="button" className="icon-btn icon-btn--utility" aria-label="Buscar">
         <SearchIcon />
       </button>
-      <button type="button" className="icon-btn icon-btn--utility" aria-label="Carrito">
+      <button
+        type="button"
+        className="icon-btn icon-btn--utility icon-btn--cart"
+        aria-label={
+          cartCount > 0
+            ? `Finalizar pedido por WhatsApp, ${cartCount} productos`
+            : 'Consultar pedido por WhatsApp'
+        }
+        onClick={onCartClick}
+      >
         <CartIcon />
+        {cartCount > 0 ? (
+          <span className="cart-badge" aria-hidden>
+            {cartCount > 99 ? '99+' : cartCount}
+          </span>
+        ) : null}
       </button>
     </>
   )
@@ -40,26 +62,27 @@ function HeaderActions() {
 
 export function Navbar({ leftItems, rightItems }: NavbarProps) {
   const { isOpen, toggleMenu, closeMenu } = useNavMenu()
+  const { totalItems } = useCart()
+  const { openWhatsAppCheckout } = useWhatsAppCheckout()
   const mobileItems = [...leftItems, ...rightItems]
 
   return (
     <header className="site-header" id="home">
       <div className="site-header__inner">
         <div className="site-header__row nav--desktop">
-          <div className="site-header__nav-bundle">
-            <nav className="nav nav--left" aria-label="Principal izquierda">
-              <NavLinks items={leftItems} />
-            </nav>
+          <nav className="nav nav--wing nav--wing-left" aria-label="Principal izquierda">
+            <NavLinks items={leftItems} />
+          </nav>
 
-            <div className="brand-slot" aria-hidden />
+          <div className="brand-slot" aria-hidden />
 
-            <nav className="nav nav--right" aria-label="Principal derecha">
+          <div className="site-header__wing-right">
+            <nav className="nav nav--wing nav--wing-right" aria-label="Principal derecha">
               <NavLinks items={rightItems} />
             </nav>
-          </div>
-
-          <div className="header-actions site-header__utilities">
-            <HeaderActions />
+            <div className="header-actions site-header__utilities">
+              <HeaderActions cartCount={totalItems} onCartClick={openWhatsAppCheckout} />
+            </div>
           </div>
         </div>
 
@@ -75,7 +98,7 @@ export function Navbar({ leftItems, rightItems }: NavbarProps) {
             <MenuIcon open={isOpen} />
           </button>
           <div className="header-actions">
-            <HeaderActions />
+            <HeaderActions cartCount={totalItems} onCartClick={openWhatsAppCheckout} />
           </div>
         </div>
       </div>
@@ -89,11 +112,8 @@ export function Navbar({ leftItems, rightItems }: NavbarProps) {
         <NavLinks items={mobileItems} onNavigate={closeMenu} />
       </nav>
 
-      <a href="#home" className="brand" aria-label="Bellaria inicio">
-        <span className="brand__crest" aria-hidden>
-          <span className="brand__name">Bellaria</span>
-          <span className="brand__tagline">Cakes &amp; Pastry</span>
-        </span>
+      <a href="#home" className="brand" aria-label={`${SITE_BRAND_NAME} inicio`}>
+        <SiteLogo className="brand__logo" />
       </a>
       <div className="scallop scallop--header" aria-hidden />
     </header>

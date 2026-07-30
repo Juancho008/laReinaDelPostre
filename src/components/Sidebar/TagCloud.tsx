@@ -1,4 +1,5 @@
 import type { Tag } from '../../types'
+import { WidgetFrame } from './WidgetFrame'
 
 interface TagCloudProps {
   tags: Tag[]
@@ -8,25 +9,20 @@ interface TagCloudProps {
 
 export function TagCloud({ tags, selectedTagId, onToggleTag }: TagCloudProps) {
   return (
-    <div className="widget">
-      <h2 className="widget__title">Tags</h2>
+    <WidgetFrame className="sidebar-widget--tags">
+      <h2 className="sidebar-widget__title">Etiquetas</h2>
       <div className="tag-cloud">
         {tags.map((tag) => (
           <button
             key={tag.id}
             type="button"
-            className={
-              selectedTagId === tag.id ? 'tag tag--active' : 'tag'
-            }
+            className={selectedTagId === tag.id ? 'tag tag--active' : 'tag'}
             onClick={() => onToggleTag(tag.id)}
           >
             {tag.label}
           </button>
         ))}
       </div>
-      <span className="widget__heart" aria-hidden>
-        ♥
-      </span>
-    </div>
+    </WidgetFrame>
   )
 }

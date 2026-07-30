@@ -6,7 +6,10 @@ export interface Product {
   price: number
   salePrice?: number
   onSale?: boolean
+  featured?: boolean
   tagIds: string[]
+  /** Viñetas para el modal de detalle (pueden incluir emojis) */
+  descriptionLines: string[]
 }
 
 export interface Tag {

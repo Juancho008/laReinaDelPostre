@@ -11,6 +11,7 @@ const sampleProducts: Product[] = [
     rating: 5,
     price: 17,
     tagIds: ['fruit'],
+    descriptionLines: ['test'],
   },
   {
     id: '2',
@@ -21,6 +22,7 @@ const sampleProducts: Product[] = [
     salePrice: 9,
     onSale: true,
     tagIds: ['toffee'],
+    descriptionLines: ['test'],
   },
 ]
 

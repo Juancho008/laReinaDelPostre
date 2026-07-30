@@ -1,60 +1,113 @@
-import type { Product } from '../../types'
+﻿import type { Product } from '../../types'
+import { PRODUCT_PRICE_ARS } from './pricing'
 
 export const MOCK_PRODUCTS: Product[] = [
   {
-    id: 'yumi-macaroons',
-    name: 'Yumi Macaroons',
-    imageUrl:
-      'https://images.unsplash.com/photo-1569860876681-504a30f3ff83?w=600&h=600&fit=crop',
+    id: 'copa-chocolate-frutilla',
+    name: 'Brownie con Frutillas 🍓🍫',
+    imageUrl: '/desserts/postre-1.webp',
     rating: 5,
-    price: 17,
-    tagIds: ['fruit', 'milk'],
+    price: PRODUCT_PRICE_ARS,
+    featured: true,
+    tagIds: ['chocolate', 'frutilla', 'copas'],
+    descriptionLines: [
+      '🍫 Brownie de chocolate',
+      '🥄 Dulce de leche',
+      '🤍 Crema chantilly',
+      '🍓 Frutillas frescas',
+    ],
   },
   {
-    id: 'premium-lollipop',
-    name: 'Premium Lollipop',
-    imageUrl:
-      'https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?w=600&h=600&fit=crop',
-    rating: 4,
-    price: 14,
-    salePrice: 9,
-    onSale: true,
-    tagIds: ['toffee', 'fruit'],
-  },
-  {
-    id: 'french-macaroon',
-    name: 'French Macaroon',
-    imageUrl:
-      'https://images.unsplash.com/photo-1612203985729-70721283a814?w=600&h=600&fit=crop',
+    id: 'copa-cookies-cream',
+    name: 'Brownie Oreo',
+    imageUrl: '/desserts/postre-2.webp',
     rating: 5,
-    price: 13,
-    tagIds: ['milk', 'coffee'],
+    price: PRODUCT_PRICE_ARS,
+    tagIds: ['chocolate', 'copas'],
+    descriptionLines: [
+      '🍫 Brownie de chocolate',
+      '🥄 Dulce de leche',
+      '🤍 Crema chantilly',
+      'Galletitas oreos',
+    ],
   },
   {
-    id: 'classic-macaroon',
-    name: 'Classic Macaroon',
-    imageUrl:
-      'https://images.unsplash.com/photo-1558961363-fa8aaf64c3cd?w=600&h=600&fit=crop',
+    id: 'copa-cacao',
+    name: 'Tiramisú ☕🤎',
+    imageUrl: '/desserts/postre-3.webp',
     rating: 5,
-    price: 15,
-    tagIds: ['chocolate', 'milk'],
+    price: PRODUCT_PRICE_ARS,
+    tagIds: ['chocolate', 'copas'],
+    descriptionLines: [
+      '☕ Vainillas humedecidas en café',
+      '🥄 Crema de mascarpone',
+      '🍫 Cacao amargo',
+    ],
   },
   {
-    id: 'candy-lollipop',
-    name: 'Candy Lollipop',
-    imageUrl:
-      'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600&h=600&fit=crop',
-    rating: 4,
-    price: 15,
-    tagIds: ['toffee', 'ice-cream'],
-  },
-  {
-    id: 'happy-ninja',
-    name: 'Happy Ninja',
-    imageUrl:
-      'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&h=600&fit=crop',
+    id: 'copa-kiwi-frutillas',
+    name: 'Mini Tarta Frutal 🍓🥝🍑',
+    imageUrl: '/desserts/postre-4.webp',
     rating: 5,
-    price: 12,
-    tagIds: ['chocolate', 'cupcake'],
+    price: PRODUCT_PRICE_ARS,
+    tagIds: ['frutas', 'frutilla', 'copas'],
+    descriptionLines: [
+      'Base de galletitas con manteca',
+      'Crema pastelera',
+      'Kiwi, durazno y frutillas frescas',
+      'Crema chantilly',
+    ],
+  },
+  {
+    id: 'cheesecake-frutilla',
+    name: 'Frutillas con Crema 🍓🤍',
+    imageUrl: '/desserts/postre-5.webp',
+    rating: 5,
+    price: PRODUCT_PRICE_ARS,
+    tagIds: ['frutilla', 'cheesecake'],
+    descriptionLines: [
+      'Base de vainillas',
+      'Crema chantilly',
+      'Frutillas frescas',
+    ],
+  },
+  {
+    id: 'chocotorta',
+    name: 'Chocotorta 🍫🤎',
+    imageUrl: '/desserts/postre-6.webp',
+    rating: 5,
+    price: PRODUCT_PRICE_ARS,
+    tagIds: ['chocolate', 'clasicos'],
+    descriptionLines: [
+      'Chocolinas',
+      'Mezcla de dulce de leche y queso crema',
+    ],
+  },
+  {
+    id: 'copa-banana-ddl',
+    name: 'Banana Split 🍌🤎',
+    imageUrl: '/desserts/postre-7.webp',
+    rating: 5,
+    price: PRODUCT_PRICE_ARS,
+    tagIds: ['dulce-de-leche', 'copas'],
+    descriptionLines: [
+      'Base de vainillas humedecidas en chocolatada',
+      'Mousse de dulce de leche con trocitos de banana',
+      'Crema chantilly',
+      'Bananas en rodajas',
+    ],
+  },
+  {
+    id: 'copa-dulce-de-leche',
+    name: 'Budín de Pan 🍮🤎',
+    imageUrl: '/desserts/postre-8.webp',
+    rating: 5,
+    price: PRODUCT_PRICE_ARS,
+    tagIds: ['dulce-de-leche', 'copas'],
+    descriptionLines: [
+      'Budín de pan casero',
+      'Dulce de leche',
+      'Salsa de caramelo',
+    ],
   },
 ]

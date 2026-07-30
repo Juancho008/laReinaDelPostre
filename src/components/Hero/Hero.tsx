@@ -1,29 +1,39 @@
-const HERO_IMAGE = '/hero.webp'
+import { useHeroCarousel } from '../../hooks'
 
 export function Hero() {
+  const { slides, activeIndex } = useHeroCarousel()
+
   return (
     <section className="hero" aria-labelledby="hero-title">
       <div className="scallop scallop--hero-top" aria-hidden />
-      <img
-        className="hero__cover"
-        src={HERO_IMAGE}
-        alt=""
-        aria-hidden
-      />
+      <div className="hero__slides" aria-hidden>
+        {slides.map((src, index) => (
+          <img
+            key={src}
+            className={
+              index === activeIndex ? 'hero__slide hero__slide--active' : 'hero__slide'
+            }
+            src={src}
+            alt=""
+            decoding="async"
+            fetchPriority={index === 0 ? 'high' : 'low'}
+          />
+        ))}
+      </div>
       <div className="hero__inner">
         <div className="hero__content">
           <span className="hero__flourish" aria-hidden>
             ✦
           </span>
           <h1 id="hero-title" className="hero__title">
-            Just Treats
+            Dulces momentos
           </h1>
           <p className="hero__subtitle">
             Pasteles artesanales, macarons y dulces hechos con amor para endulzar cada momento
             especial.
           </p>
           <a className="hero__cta" href="#shop">
-            Shop Now
+            Comprar ahora
           </a>
         </div>
       </div>

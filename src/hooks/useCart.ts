@@ -1,10 +1,13 @@
 import { useMemo } from 'react'
+import { SHIPPING_COST_ARS } from '../Mock/data/pricing'
 import { useCartStore, useCatalogStore } from '../Mock'
 import type { Product } from '../types'
+import { getProductUnitPrice } from '../utils/getProductUnitPrice'
 
 export function useCart() {
   const items = useCartStore((state) => state.items)
   const addItem = useCartStore((state) => state.addItem)
+  const decrementItem = useCartStore((state) => state.decrementItem)
   const removeItem = useCartStore((state) => state.removeItem)
   const clearCart = useCartStore((state) => state.clearCart)
   const products = useCatalogStore((state) => state.products)
@@ -26,11 +29,25 @@ export function useCart() {
     [items],
   )
 
+  const subtotalPrice = useMemo(() => {
+    return cartProducts.reduce(
+      (sum, entry) => sum + getProductUnitPrice(entry.product) * entry.quantity,
+      0,
+    )
+  }, [cartProducts])
+
+  const shippingCost = items.length === 0 ? 0 : SHIPPING_COST_ARS
+  const totalPrice = subtotalPrice + shippingCost
+
   return {
     items,
     cartProducts,
     totalItems,
+    subtotalPrice,
+    shippingCost,
+    totalPrice,
     addItem,
+    decrementItem,
     removeItem,
     clearCart,
     isEmpty: items.length === 0,

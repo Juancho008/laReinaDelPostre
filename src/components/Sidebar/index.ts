@@ -1,4 +1,6 @@
 export { Sidebar } from './Sidebar'
 export { SearchWidget } from './SearchWidget'
 export { CartWidget } from './CartWidget'
+export { PriceFilterWidget } from './PriceFilterWidget'
 export { TagCloud } from './TagCloud'
+export { WidgetFrame } from './WidgetFrame'

@@ -3,6 +3,8 @@ import { useCartStore } from './cartStore'
 import { useCatalogStore } from './catalogStore'
 import { MOCK_PRODUCTS } from './data/products'
 
+const sampleId = 'chocotorta'
+
 describe('cartStore', () => {
   beforeEach(() => {
     useCartStore.setState({ items: [] })
@@ -17,11 +19,21 @@ describe('cartStore', () => {
   it('agrega y acumula cantidades del mismo producto', () => {
     const { addItem } = useCartStore.getState()
 
-    addItem('yumi-macaroons')
-    addItem('yumi-macaroons')
+    addItem(sampleId)
+    addItem(sampleId)
 
-    expect(useCartStore.getState().items).toEqual([
-      { productId: 'yumi-macaroons', quantity: 2 },
-    ])
+    expect(useCartStore.getState().items).toEqual([{ productId: sampleId, quantity: 2 }])
+  })
+
+  it('decrementa cantidad y elimina la línea al llegar a cero', () => {
+    const { addItem, decrementItem } = useCartStore.getState()
+
+    addItem(sampleId)
+    addItem(sampleId)
+    decrementItem(sampleId)
+    expect(useCartStore.getState().items).toEqual([{ productId: sampleId, quantity: 1 }])
+
+    decrementItem(sampleId)
+    expect(useCartStore.getState().items).toEqual([])
   })
 })
