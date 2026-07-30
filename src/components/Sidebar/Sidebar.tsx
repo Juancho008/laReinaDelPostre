@@ -52,26 +52,34 @@ export function Sidebar({
 }: SidebarProps) {
   return (
     <aside className="shop-sidebar" aria-label="Filtros y carrito">
-      <SearchWidget value={searchQuery} onChange={onSearchChange} onSubmit={onSearchSubmit} />
-      <CartWidget
-        isEmpty={cartEmpty}
-        items={cartItems}
-        subtotalPrice={cartSubtotalPrice}
-        shippingCost={cartShippingCost}
-        totalPrice={cartTotalPrice}
-        onIncrement={onCartIncrement}
-        onDecrement={onCartDecrement}
-        onRemove={onCartRemove}
-        onClear={onCartClear}
-      />
-      <PriceFilterWidget
-        min={priceMin}
-        max={priceMax}
-        ceiling={priceCeiling}
-        onMaxChange={onPriceMaxChange}
-        onApply={onPriceFilterApply}
-      />
-      <TagCloud tags={tags} selectedTagId={selectedTagId} onToggleTag={onToggleTag} />
+      <div className="shop-sidebar__block shop-sidebar__block--search">
+        <SearchWidget value={searchQuery} onChange={onSearchChange} onSubmit={onSearchSubmit} />
+      </div>
+      <div className="shop-sidebar__block shop-sidebar__block--cart">
+        <CartWidget
+          isEmpty={cartEmpty}
+          items={cartItems}
+          subtotalPrice={cartSubtotalPrice}
+          shippingCost={cartShippingCost}
+          totalPrice={cartTotalPrice}
+          onIncrement={onCartIncrement}
+          onDecrement={onCartDecrement}
+          onRemove={onCartRemove}
+          onClear={onCartClear}
+        />
+      </div>
+      <div className="shop-sidebar__block shop-sidebar__block--price">
+        <PriceFilterWidget
+          min={priceMin}
+          max={priceMax}
+          ceiling={priceCeiling}
+          onMaxChange={onPriceMaxChange}
+          onApply={onPriceFilterApply}
+        />
+      </div>
+      <div className="shop-sidebar__block shop-sidebar__block--tags">
+        <TagCloud tags={tags} selectedTagId={selectedTagId} onToggleTag={onToggleTag} />
+      </div>
     </aside>
   )
 }

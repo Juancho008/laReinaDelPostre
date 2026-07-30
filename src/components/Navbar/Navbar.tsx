@@ -36,7 +36,7 @@ function HeaderActions({
 }) {
   return (
     <>
-      <button type="button" className="icon-btn icon-btn--utility" aria-label="Buscar">
+      <button type="button" className="icon-btn icon-btn--utility icon-btn--search" aria-label="Buscar">
         <SearchIcon />
       </button>
       <button
@@ -86,7 +86,7 @@ export function Navbar({ leftItems, rightItems }: NavbarProps) {
           </div>
         </div>
 
-        <div className="site-header__row site-header__toolbar nav--mobile">
+        <div className="site-header__toolbar nav--mobile">
           <button
             type="button"
             className="icon-btn icon-btn--utility icon-btn--menu"
