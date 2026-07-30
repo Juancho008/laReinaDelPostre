@@ -1,3 +1,4 @@
+import { handleSmoothAnchorClick } from '../../utils/smoothScroll'
 import { useHeroCarousel } from '../../hooks'
 
 export function Hero() {
@@ -32,7 +33,11 @@ export function Hero() {
             Pasteles artesanales, macarons y dulces hechos con amor para endulzar cada momento
             especial.
           </p>
-          <a className="hero__cta" href="#shop">
+          <a
+            className="hero__cta"
+            href="#shop"
+            onClick={(event) => handleSmoothAnchorClick(event, '#shop')}
+          >
             Comprar ahora
           </a>
         </div>

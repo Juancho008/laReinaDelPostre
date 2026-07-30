@@ -1,6 +1,8 @@
+import type { MouseEvent } from 'react'
 import type { NavItem } from '../../types'
 import { SITE_BRAND_NAME } from '../../Mock/data/brand'
 import { useCart, useNavMenu, useWhatsAppCheckout } from '../../hooks'
+import { handleSmoothAnchorClick } from '../../utils/smoothScroll'
 import { SiteLogo } from '../SiteLogo'
 import { CartIcon, MenuIcon, SearchIcon } from './NavIcons'
 
@@ -10,6 +12,10 @@ interface NavbarProps {
 }
 
 function NavLinks({ items, onNavigate }: { items: NavItem[]; onNavigate?: () => void }) {
+  const handleClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+    handleSmoothAnchorClick(event, href, onNavigate)
+  }
+
   return (
     <ul className="nav-links">
       {items.map((item) => (
@@ -17,7 +23,7 @@ function NavLinks({ items, onNavigate }: { items: NavItem[]; onNavigate?: () => 
           <a
             href={item.href}
             className={item.active ? 'nav-link nav-link--active' : 'nav-link'}
-            onClick={onNavigate}
+            onClick={(event) => handleClick(event, item.href)}
           >
             {item.label}
           </a>
@@ -107,12 +113,18 @@ export function Navbar({ leftItems, rightItems }: NavbarProps) {
         id="site-mobile-nav"
         className={isOpen ? 'site-header__mobile-nav is-open' : 'site-header__mobile-nav'}
         aria-label="Menú móvil"
-        hidden={!isOpen}
+        aria-hidden={!isOpen}
+        inert={!isOpen}
       >
         <NavLinks items={mobileItems} onNavigate={closeMenu} />
       </nav>
 
-      <a href="#home" className="brand" aria-label={`${SITE_BRAND_NAME} inicio`}>
+      <a
+        href="#home"
+        className="brand"
+        aria-label={`${SITE_BRAND_NAME} inicio`}
+        onClick={(event) => handleSmoothAnchorClick(event, '#home')}
+      >
         <SiteLogo className="brand__logo" />
       </a>
       <div className="scallop scallop--header" aria-hidden />
