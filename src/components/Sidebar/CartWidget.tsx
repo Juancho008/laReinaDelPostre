@@ -31,7 +31,7 @@ export function CartWidget({
   const { openWhatsAppCheckout } = useWhatsAppCheckout()
   const [includeShipping, setIncludeShipping] = useState(true)
   const effectiveShippingCost = includeShipping ? shippingCost : 0
-  const effectiveTotalPrice = subtotalPrice + effectiveShippingCost
+  const effectiveTotalPrice = includeShipping ? totalPrice : subtotalPrice
 
   return (
     <WidgetFrame id="cart-widget">
