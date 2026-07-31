@@ -12,7 +12,6 @@ export function buildWhatsAppOrderMessage(
   subtotalPrice: number,
   shippingCost: number,
   totalPrice: number,
-  includeShipping = true,
 ): string {
   const lines = items.map(({ product, quantity }) => {
     const unit = getProductUnitPrice(product)
@@ -25,7 +24,7 @@ export function buildWhatsAppOrderMessage(
     ...lines,
     '',
     `Subtotal: ${formatPrice(subtotalPrice)}`,
-    ...(includeShipping ? [`Envío: ${formatPrice(shippingCost)}`] : []),
+    `Envío: ${formatPrice(shippingCost)}`,
     `Total: ${formatPrice(totalPrice)}`,
     '',
     'Gracias.',

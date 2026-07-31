@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { formatPrice } from '../../utils/formatPrice'
 import { getProductUnitPrice } from '../../utils/getProductUnitPrice'
 import type { Product } from '../../types'
@@ -29,9 +28,6 @@ export function CartWidget({
   onClear,
 }: CartWidgetProps) {
   const { openWhatsAppCheckout } = useWhatsAppCheckout()
-  const [includeShipping, setIncludeShipping] = useState(true)
-  const effectiveShippingCost = includeShipping ? shippingCost : 0
-  const effectiveTotalPrice = subtotalPrice + effectiveShippingCost
 
   return (
     <WidgetFrame id="cart-widget">
@@ -81,14 +77,6 @@ export function CartWidget({
               </li>
             ))}
           </ul>
-          <label className="cart-shipping-toggle">
-            <input
-              type="checkbox"
-              checked={includeShipping}
-              onChange={(event) => setIncludeShipping(event.target.checked)}
-            />
-            <span>Incluir envío</span>
-          </label>
           <div className="cart-totals">
             <p className="cart-totals__row">
               <span>Subtotal</span>
@@ -96,16 +84,16 @@ export function CartWidget({
             </p>
             <p className="cart-totals__row">
               <span>Envío</span>
-              <strong>{includeShipping ? formatPrice(effectiveShippingCost) : 'Sin envío'}</strong>
+              <strong>{formatPrice(shippingCost)}</strong>
             </p>
             <p className="cart-total">
-              Total: <strong>{formatPrice(effectiveTotalPrice)}</strong>
+              Total: <strong>{formatPrice(totalPrice)}</strong>
             </p>
           </div>
           <button type="button" className="cart-clear" onClick={onClear}>
             Vaciar carrito
           </button>
-          <button type="button" className="cart-checkout" onClick={() => openWhatsAppCheckout(includeShipping)}>
+          <button type="button" className="cart-checkout" onClick={openWhatsAppCheckout}>
             Pedir por WhatsApp
           </button>
         </>
