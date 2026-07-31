@@ -10,7 +10,7 @@ export const MOCK_CONTACT_PHONES: ContactPhone[] = [
 ]
 
 /** Número principal para pedidos por WhatsApp */
-export const MOCK_WHATSAPP_PHONE = MOCK_CONTACT_PHONES[0].phone
+export const MOCK_WHATSAPP_PHONE = MOCK_CONTACT_PHONES[1].phone
 
 export const MOCK_WHATSAPP_EMPTY_MESSAGE =
   'Hola, quiero consultar por productos de La Reina del Postre.'
