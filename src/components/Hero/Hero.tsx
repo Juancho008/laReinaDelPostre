@@ -30,8 +30,9 @@ export function Hero() {
             Dulces momentos
           </h1>
           <p className="hero__subtitle">
-            Pasteles artesanales, macarons y dulces hechos con amor para endulzar cada momento
-            especial.
+            Descubre la magia de nuestros productos y déjate llevar por un mundo de sabores
+            irresistibles. Cada bocado es una experiencia única que te transportará a un lugar de
+            felicidad y deleite.
           </p>
           <a
             className="hero__cta"
