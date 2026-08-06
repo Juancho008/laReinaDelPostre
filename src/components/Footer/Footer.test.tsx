@@ -15,6 +15,6 @@ describe('Footer', () => {
       'href',
       'https://www.instagram.com/lareinadelospostres__/',
     )
-    expect(screen.getByText(/La Reina del Postre/)).toBeInTheDocument()
+    expect(screen.getByText(/La reina de los postres/)).toBeInTheDocument()
   })
 })

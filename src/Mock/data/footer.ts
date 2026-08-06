@@ -15,4 +15,4 @@ export const MOCK_SOCIAL_LINKS: SocialLink[] = [
 export const FOOTER_BG_IMAGE = '/hero2.webp'
 
 export const FOOTER_COPYRIGHT =
-  'La Reina del Postre — Pasteles y repostería artesanal'
+  'La reina de los postres — Pasteles y repostería artesanal'
