@@ -7,7 +7,7 @@ describe('LoadingScreen', () => {
     render(<LoadingScreen exiting={false} progress={42} />)
 
     expect(screen.getByRole('status', { name: 'Cargando la tienda' })).toBeInTheDocument()
-    expect(screen.getByText('La Reina del Postre')).toBeInTheDocument()
+    expect(screen.getByText('La reina de los postres')).toBeInTheDocument()
     expect(screen.getByText('42%')).toBeInTheDocument()
     expect(screen.getByText(/Horneando magia/)).toBeInTheDocument()
   })

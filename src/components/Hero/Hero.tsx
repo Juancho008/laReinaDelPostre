@@ -27,7 +27,7 @@ export function Hero() {
             ✦
           </span>
           <h1 id="hero-title" className="hero__title">
-            Dulces momentos
+            Coronando tus momentos más dulces.
           </h1>
           <p className="hero__subtitle">
             Descubre la magia de nuestros productos y déjate llevar por un mundo de sabores
